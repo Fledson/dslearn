@@ -1,18 +1,22 @@
 package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_course")
-public class Course {
-
+public class Course implements Serializable {
+    private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String imgUri;
     private String imgGrayUri;
+
+    @OneToMany(mappedBy = "course")
+    private List<Offer> offers = new ArrayList<>();
 
     public Course() {}
 
