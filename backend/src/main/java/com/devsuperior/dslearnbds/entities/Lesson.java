@@ -2,9 +2,7 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_lesson")
@@ -32,6 +30,9 @@ public abstract class Lesson implements Serializable {
             } // usado dessa forma pois a tabela de Enrollment é uma tabela composta por 2 chaves, então nesse caso são 3 colunas
     )
     private Set<Enrollment> enrollmentsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "lesson")
+    private List<Deliver> lesson = new ArrayList<>();
 
     public Lesson() {
     }
@@ -77,6 +78,10 @@ public abstract class Lesson implements Serializable {
 
     public Set<Enrollment> getEnrollmentsDone() {
         return enrollmentsDone;
+    }
+
+    public List<Deliver> getLesson() {
+        return lesson;
     }
 
     @Override
