@@ -32,3 +32,18 @@ INSERT INTO tb_enrollment (user_id, offer_id, enroll_Moment, refund_Moment, aval
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Primeiro feedback de tarefa: favor revisar', TIMESTAMP WITH TIME ZONE '2020-12-10T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Segundo feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-12-12T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Terceiro feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-12-14T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula 1', 1, 1);
+INSERT INTO tb_content (id, text_Content, video_Uri) VALUES (1, 'Material de Apoio: encurtador.com.br/ewxIU','https://youtu.be/Pd5tr483No0');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula 2', 2, 1);
+INSERT INTO tb_content (id, text_Content, video_Uri) VALUES (2, '','https://youtu.be/Pd5tr483No0');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula 2', 3, 1);
+INSERT INTO tb_content (id, text_Content, video_Uri) VALUES (3, 'Material de Apoio: ','https://youtu.be/Pd5tr483No0');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Tarefa Capitulo 1', 4, 1);
+INSERT INTO tb_task (id, description, question_Count, approval_Count, weight, due_Date) VALUES (4, 'Trabalho DsAlgo', 5 , 4, 1.0, TIMESTAMP WITH TIME ZONE '2020-12-25T03:00:00Z');
+
+INSERT INTO tb_lesson_done (lesson_id, user_id, offer_id) VALUES (1, 1, 1);
+INSERT INTO tb_lesson_done (lesson_id, user_id, offer_id) VALUES (2, 1, 1);
