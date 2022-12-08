@@ -1,18 +1,32 @@
 package com.devsuperior.dslearnbds.services;
 
 import com.devsuperior.dslearnbds.entities.User;
+import com.devsuperior.dslearnbds.entities.dto.UserDTO;
 import com.devsuperior.dslearnbds.repositories.UserRepository;
+import com.devsuperior.dslearnbds.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    @Transactional(readOnly = true)
+    public UserDTO findById(Long id) {
+        User user = repository
+                    .findById(id)
+                    .orElseThrow( () -> new ResourceNotFoundException("Entity not found"));
+
+        return new UserDTO(user);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
