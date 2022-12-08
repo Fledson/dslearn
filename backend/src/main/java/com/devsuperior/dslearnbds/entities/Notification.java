@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_notification")
 public class Notification implements Serializable {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
