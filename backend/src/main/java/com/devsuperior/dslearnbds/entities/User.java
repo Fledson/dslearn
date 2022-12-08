@@ -128,4 +128,19 @@ public class User implements UserDetails, Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    /**
+     * Verifica se existe um roleName na lista de roles do Usuario
+     **/
+    public boolean hasHole(String roleName) {
+
+        for (Role role : roles) {
+            if (role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
