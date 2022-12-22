@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -45,6 +46,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private jwtTokenEnhancer tokenEnhancer;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     /**
      * Configurar a segurança do Servidor de Autorização, em termos práticos o
      * endpoint /oauth/token.
@@ -68,9 +72,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // scopo, como vai ser o acesso
                 .scopes("read", "write")
                 // como será feito o acesso de login
-                .authorizedGrantTypes("password")
+                .authorizedGrantTypes("password", "refresh_token")
                 // tempo para expirar o token
-                .accessTokenValiditySeconds(jwtDuration);
+                .accessTokenValiditySeconds(jwtDuration)
+                // para refresh token
+                .refreshTokenValiditySeconds(jwtDuration);
     }
 
     /**
@@ -92,6 +98,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenStore(tokenStore) // processar o token
                 .accessTokenConverter(accessTokenConverter)
                 // dados adicionais
-                .tokenEnhancer(chain);
+                .tokenEnhancer(chain)
+                // para refresh token
+                .userDetailsService(userDetailsService);
     }
 }
